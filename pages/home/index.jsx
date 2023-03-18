@@ -30,11 +30,11 @@ function HomePage() {
             'You will be logged out. Are you sure you want to close?')
     }
 
-    // TODO: remove the below useEffect hook
-    useEffect(() => {
-        console.log(`Username: ${username}`)
-        console.log(`UserId: ${userId}`)
-    }, [])
+    // // TODO: remove the below useEffect hook
+    // useEffect(() => {
+    //     console.log(`Username: ${username}`)
+    //     console.log(`UserId: ${userId}`)
+    // }, [])
 
     useEffect(() => {
         window.addEventListener('beforeunload', alertUser)
@@ -72,6 +72,7 @@ function HomePage() {
         return () => {
             document.removeEventListener('visibilitychange', setOnlineStatus)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
