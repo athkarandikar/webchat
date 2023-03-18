@@ -48,8 +48,6 @@ function Header() {
             if (!isUsernameValid || !isUsernameTouched) return
             setIsLoading(true)
 
-            console.log('hei')
-
             resetUsername()
             const res = await fetch('/api/add-user', {
                 method: 'POST',

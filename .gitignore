@@ -1,8 +1,9 @@
 .vscode
 node_modules
+.next
 help.txt
 unnecessaryFiles.txt
+
 *.ini
 desktop.ini
 **/desktop.ini
-.next

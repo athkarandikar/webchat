@@ -147,9 +147,6 @@ function MessageArea(props, ref) {
             if (!analyzeSentimentData.isAddingSentimentSuccessful) {
                 setAnalyzeSentimentModalData(analyzeSentimentData)
                 openAnalyzeSentimentResponseModal()
-            } else {
-                console.log(analyzeSentimentData)
-                // numMessages = analyzeSentimentData.numMessages
             }
         }
     }
