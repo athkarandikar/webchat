@@ -4,7 +4,7 @@ import React from 'react'
 import {useEffect} from 'react'
 import classes from './PopperNew.module.scss'
 
-const popperNew = React.forwardRef((props, ref) => {
+const popperNew = React.forwardRef(function popperNew(props, ref) {
     return (
         <div ref={ref}>
             <div

@@ -70,6 +70,7 @@ function MessageArea(props, ref) {
     useEffect(() => {
         if (inputRef.current) inputRef.current.focus()
         resetMessage()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [chatName])
 
     // useEffect(() => {}, [numMessages])

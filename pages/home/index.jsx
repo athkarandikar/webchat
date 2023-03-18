@@ -50,6 +50,7 @@ function HomePage() {
         return () => {
             unsubscribe()
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     async function setOnlineStatus() {
@@ -88,6 +89,7 @@ function HomePage() {
             dispatch(logout(userId))
             setIsLoading(false)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
