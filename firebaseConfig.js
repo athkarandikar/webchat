@@ -1,13 +1,22 @@
 import {initializeApp} from 'firebase/app'
 import {getFirestore} from 'firebase/firestore'
 
+// const firebaseConfig = {
+//     apiKey: 'AIzaSyCRFVKeZBaLLM_4IOse224NYe5YTsvl1rQ',
+//     authDomain: 'webchat-f730f.firebaseapp.com',
+//     projectId: 'webchat-f730f',
+//     storageBucket: 'webchat-f730f.appspot.com',
+//     messagingSenderId: '985547033722',
+//     appId: '1:985547033722:web:3f1e7595c8263a5740ffc3'
+// }
+
 const firebaseConfig = {
-    apiKey: 'AIzaSyCRFVKeZBaLLM_4IOse224NYe5YTsvl1rQ',
-    authDomain: 'webchat-f730f.firebaseapp.com',
-    projectId: 'webchat-f730f',
-    storageBucket: 'webchat-f730f.appspot.com',
-    messagingSenderId: '985547033722',
-    appId: '1:985547033722:web:3f1e7595c8263a5740ffc3'
+    apiKey: process.env.apiKey,
+    authDomain: process.env.authDomain,
+    projectId: process.env.projectId,
+    storageBucket: process.env.storageBucket,
+    messagingSenderId: process.env.messagingSenderId,
+    appId: process.env.appId
 }
 
 export const app = initializeApp(firebaseConfig)
