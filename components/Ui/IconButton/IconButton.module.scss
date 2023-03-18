@@ -1,0 +1,19 @@
+.button {
+    width: 3.8rem;
+    height: 3.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.2s ease-out, transform 0.1s ease-out;
+
+    &:active {
+        transform: scale(90%);
+    }
+
+    // .icon {
+    //     width: 2.4rem;
+    //     height: 2.4rem;
+    // }
+}

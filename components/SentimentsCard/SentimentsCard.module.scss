@@ -1,0 +1,19 @@
+@import '../../styles/_colors.scss';
+
+.sentiment-analysis-container {
+    display: flex;
+    padding: 0.8rem 0.8rem 0.4rem 0.8rem;
+    gap: 0.8rem;
+    background: $gray--outline;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-out, transform 0.1s ease-out;
+
+    &:hover {
+        background-color: $hover--400;
+    }
+
+    &:active {
+        transform: scale(92%);
+    }
+}

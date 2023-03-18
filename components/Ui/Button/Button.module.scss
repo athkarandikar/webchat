@@ -1,0 +1,67 @@
+@import '../../../styles/_colors.scss';
+
+.button {
+    height: 4.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1.6rem;
+    gap: 0.8rem;
+    border-radius: 5px;
+    color: $white;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.2s ease-out, transform 0.1s ease-out;
+
+    &:hover {
+        .container-image-icon {
+            transform: translateX(0.5rem);
+        }
+    }
+
+    &:active {
+        transform: scale(95%);
+    }
+
+    .container-image-icon {
+        width: 1.4rem;
+        height: 1rem;
+        position: relative;
+        transition: all 0.2s ease-out;
+
+        svg {
+            width: 100%;
+            height: 100%;
+
+            path {
+                stroke-width: 2.3;
+                stroke: $white--button--icon;
+            }
+        }
+    }
+}
+
+.filled {
+    background-color: $accent-primary;
+
+    &:hover {
+        background-color: darken($accent-primary, 5%);
+    }
+}
+
+.caution--filled {
+    background-color: $red--error--filled;
+
+    &:hover {
+        background-color: darken($red--error--filled, 5%);
+    }
+}
+
+.outlined {
+    color: $white--text;
+    border: 1px solid $accent-primary;
+
+    &:hover {
+        background-color: #052048;
+    }
+}

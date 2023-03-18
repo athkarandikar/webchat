@@ -1,0 +1,22 @@
+@import '../../../styles/_colors.scss';
+
+.menu-item {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    padding: 0.4rem 1.2rem 0.4rem 0.4rem;
+    width: max-content;
+    transition: background-color 0.1s ease-out;
+
+    &:hover {
+        background-color: $primary--600;
+    }
+
+    .icon {
+        scale: 0.8;
+    }
+
+    .text {
+        color: $gray--text;
+    }
+}

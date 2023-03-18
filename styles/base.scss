@@ -1,0 +1,57 @@
+@import '../styles/colors';
+@import '../styles/typography';
+
+*,
+*::after,
+*::before {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    background-color: transparent;
+}
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: $primary--primary;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+h1:not(button h1):not(a h1),
+h2:not(button h2):not(a h2),
+h3:not(button h3):not(a h3),
+h4:not(button h4):not(a h4),
+h5:not(button h5):not(a h5),
+h6:not(button h6):not(a h6),
+p:not(button p):not(a p) {
+    cursor: default;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $gray--input-caret-color;
+    border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: $hover--400;
+}

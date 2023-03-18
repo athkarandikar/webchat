@@ -1,0 +1,104 @@
+@import '../../../styles/_colors.scss';
+@import '../../../styles/_animations.scss';
+
+.input {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+
+    label {
+        color: $white--text;
+    }
+
+    .input-box {
+        width: 32rem;
+        border-radius: 5px;
+        border: 1px solid $gray--outline;
+        padding: 1.2rem 1.6rem;
+        transition: border 0.2s ease;
+
+        &:focus-within {
+            border: 1px solid lighten($gray--outline, 8%);
+        }
+    }
+
+    input {
+        background-color: $primary--primary;
+        color: $white--input-text;
+        caret-color: $gray--input-caret-color;
+
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus,
+        &:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px $primary--primary inset !important;
+            -webkit-text-fill-color: $white--input-text !important;
+        }
+    }
+
+    &:not(.PhoneInput) > input {
+        // width: 32rem;
+        // border-radius: 5px;
+        // border: 1px solid $gray--outline;
+        // padding: 1.2rem 1.6rem;
+        // transition: border 0.2s ease;
+
+        &:focus {
+            border: 1px solid lighten($gray--outline, 8%);
+        }
+    }
+
+    // for div that has an input element (input is inside of a div, such as .input-box in PasswordInput)
+    // div:has(input) {
+    //     &:focus-within {
+    //         border: 1px solid lighten($gray--outline, 8%);
+    //     }
+    // }
+
+    // .input--error,
+    &:not(.PhoneInput) > .input--error {
+        border: 1px solid $red--error--outline;
+
+        &:focus,
+        &:focus-within {
+            border: 1px solid lighten($red--error--outline, 5%);
+        }
+    }
+
+    .error-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-inline: 0.8rem;
+
+        .help-icon {
+            width: 2.4rem;
+            height: 2.4rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            color: $accent--text;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+
+            // &:hover {
+            //     background-color: $hover--100;
+            // }
+            &.help-visible {
+                background-color: $hover--100;
+            }
+        }
+    }
+
+    .error-text {
+        display: flex;
+        justify-content: flex-end;
+        color: $red--error--text;
+        margin-left: auto;
+    }
+}
+
+// .help-text {
+//     color: $white--popper-text;
+// }

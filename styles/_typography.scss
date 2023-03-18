@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/*/////////////////////////////////////////////
+// 1️⃣ ■ Font Weights
+/////////////////////////////////////////////*/
+
+.regular {
+    font-weight: 400;
+}
+
+.medium {
+    font-weight: 500;
+}
+
+.semi-bold {
+    font-weight: 600;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+/*/////////////////////////////////////////////
+// 1️⃣ ■ Font Sizes
+/////////////////////////////////////////////*/
+
+.paragraph-extra-small {
+    font-size: 1.2rem;
+    line-height: 20px;
+}
+
+.paragraph-small {
+    font-size: 1.4rem;
+    line-height: 22px;
+}
+
+.paragraph {
+    font-size: 1.6rem;
+    line-height: 24px;
+}
+
+.paragraph-large {
+    font-size: 1.8rem;
+    line-height: 28px;
+}
+
+.heading-6 {
+    font-size: 2rem;
+    line-height: 28px;
+    letter-spacing: -0.01em;
+}
+
+.heading-5 {
+    font-size: 2.4rem;
+    line-height: 32px;
+    letter-spacing: -0.01em;
+}

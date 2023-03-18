@@ -1,0 +1,45 @@
+@import '../../styles/_animations.scss';
+
+.signup {
+    position: relative;
+    animation: fade-in 0.2s ease-out;
+}
+
+.container-logo {
+    width: 12rem;
+    height: 5rem;
+    position: absolute;
+    transform: translateY(-100%);
+    top: -4.8rem;
+}
+
+.form-signup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6.4rem;
+
+    .inputs {
+        display: grid;
+        grid-template-columns: auto auto;
+        column-gap: 6.4rem;
+        row-gap: 3.2rem;
+    }
+
+    .actions {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2.4rem;
+    }
+}
+
+// @keyframes fade-in {
+//     0% {
+//         opacity: 0;
+//     }
+//     100% {
+//         opacity: 1;
+//     }
+// }

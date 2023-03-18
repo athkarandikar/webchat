@@ -1,0 +1,8 @@
+@import '../../../styles/_colors.scss';
+
+.popup-menu {
+    border: 1px solid $gray--outline;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: $primary--primary;
+}

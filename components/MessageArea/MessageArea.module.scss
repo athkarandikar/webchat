@@ -1,0 +1,120 @@
+@import '../../styles/_colors.scss';
+
+.message-area {
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid $border--separation;
+    // width: 100vw;
+    height: 100vh;
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 8rem;
+        padding: 1.6rem;
+        gap: 1rem;
+        width: 100%;
+        background-color: $primary--600;
+        border-left: 1px solid $gray--outline;
+
+        .chat-details {
+            display: flex;
+            gap: 1.6rem;
+            align-items: center;
+
+            .profile-image-container {
+                position: relative;
+                height: 4.8rem;
+                width: 4.8rem;
+
+                .image {
+                    border-radius: 50%;
+                }
+            }
+
+            .chat-name {
+                color: $white--text;
+            }
+        }
+
+        .actions-container {
+            display: flex;
+            gap: 2.4rem;
+            align-items: center;
+
+            .actions {
+                display: flex;
+                gap: 0.4rem;
+
+                .icon-button {
+                    &:hover {
+                        background-color: $hover--300;
+                    }
+                }
+            }
+        }
+    }
+
+    .messages-container {
+        height: 100%;
+        padding: 1.6rem 1.6rem 1.2rem 1.6rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        overflow: auto;
+    }
+
+    .action-bar {
+        padding: 1.2rem 0.8rem;
+
+        .action-bar-box {
+            height: 6rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.6rem 1.6rem 1.6rem 2.4rem;
+            background: $primary--600;
+            border-radius: 999px;
+            gap: 1rem;
+
+            .input {
+                width: 100%;
+                color: $white--input-text;
+                caret-color: $gray--input-caret-color--2;
+
+                &::placeholder {
+                    color: $gray--input--placeholder;
+                }
+            }
+
+            .actions {
+                .send {
+                    svg {
+                        path {
+                            transition: stroke 0.2s ease-out;
+                        }
+                    }
+
+                    &:hover {
+                        svg {
+                            path {
+                                stroke: $accent-600;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes send {
+    50% {
+        transform: translate(30%, -30%);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}

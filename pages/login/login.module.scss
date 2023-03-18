@@ -1,0 +1,43 @@
+@import '../../styles/_colors.scss';
+@import '../../styles/_animations.scss';
+
+.login {
+    animation: fade-in 0.2s ease-out;
+    position: relative;
+
+    .container-logo {
+        width: 12rem;
+        height: 5rem;
+        position: absolute;
+        transform: translateY(-100%);
+        top: -4.8rem;
+    }
+
+    .form-login {
+        display: flex;
+        flex-direction: column;
+        width: fit-content;
+        gap: 4rem;
+
+        .inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+
+            .action-text {
+                color: $gray--text;
+            }
+
+            .action-buttons {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+    }
+}

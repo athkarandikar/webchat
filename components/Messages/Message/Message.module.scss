@@ -1,0 +1,77 @@
+@import '../../../styles/_colors.scss';
+
+.message {
+    display: flex;
+    flex-direction: column;
+
+    .more {
+        opacity: 0;
+        transition: opacity 0.1s ease-out;
+
+        img {
+            filter: brightness(80%);
+        }
+    }
+
+    &:hover {
+        .more {
+            opacity: 1;
+
+            &:hover {
+                background-color: $hover--100;
+            }
+        }
+    }
+
+    .top {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+
+        .message-box {
+            display: inline-block;
+            padding: 1.2rem 1.6rem;
+            border-radius: 2.5rem;
+        }
+    }
+
+    .metadata {
+        color: $gray--text--2;
+    }
+
+    &.incoming {
+        .top {
+            .message-box {
+                background-color: $accent--message--incoming;
+            }
+        }
+
+        .message-text {
+            color: $white--text--message--incoming;
+        }
+
+        .metadata {
+            padding: 0 0 0 0.8rem;
+        }
+    }
+
+    &.outgoing {
+        .top {
+            flex-direction: row-reverse;
+
+            .message-box {
+                background-color: $accent--message--outgoing;
+            }
+        }
+
+        .message-text {
+            color: $white--text--message--outgoing;
+        }
+
+        .metadata {
+            display: flex;
+            justify-content: flex-end;
+            padding: 0 0.6rem 0 0;
+        }
+    }
+}

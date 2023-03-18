@@ -1,0 +1,33 @@
+{
+  "name": "webchat",
+  "version": "1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "12.2.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-phone-number-input": "^3.2.6",
+    "framer-motion": "^7.0.0",
+    "socket.io": "^4.5.2",
+    "socket.io-client": "^4.5.2",
+    "firebase": "^9.9.4",
+    "react-spinners": "^0.13.4",
+    "@popperjs/core": "^2.11.6",
+    "react-popper": "^2.3.0",
+    "@reduxjs/toolkit": "^1.9.1",
+    "react-redux": "^8.0.5",
+    "react-click-away-listener": "^2.2.2",
+    "sentiment": "^5.0.2"
+  },
+  "devDependencies": {
+    "eslint": "8.20.0",
+    "eslint-config-next": "12.2.3",
+    "sass": "^1.54.0"
+  }
+}

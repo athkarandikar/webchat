@@ -1,0 +1,13 @@
+@import '../../../styles/_colors.scss';
+
+.sentiment {
+    .sentiment-emoji-container {
+        position: relative;
+        width: 2.4rem;
+        height: 2.4rem;
+    }
+
+    .percent {
+        color: $gray--text;
+    }
+}
