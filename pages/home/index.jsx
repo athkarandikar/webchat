@@ -50,7 +50,6 @@ function HomePage() {
         return () => {
             unsubscribe()
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     async function setOnlineStatus() {
@@ -73,7 +72,6 @@ function HomePage() {
         return () => {
             document.removeEventListener('visibilitychange', setOnlineStatus)
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {

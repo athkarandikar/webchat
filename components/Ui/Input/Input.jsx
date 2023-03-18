@@ -35,7 +35,6 @@ function Input(props) {
             setShowHelp(false)
             setIsHelpClicked(false)
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.errorText])
 
     const inputRef = useAutoFocus(props.autoFocus)
