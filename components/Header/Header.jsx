@@ -84,6 +84,9 @@ function Header() {
         }
     )
 
+    const [isAccountDeletionSuccessful, setIsAccountDeletionSuccessful] =
+        useState(false)
+
     const {
         isModalOpen: isDeleteAccountResponseModalOpen,
         openModal: openDeleteAccountResponseModal,
@@ -91,7 +94,7 @@ function Header() {
     } = useModal(
         () => {},
         () => {
-            router.push('/login')
+            if (isAccountDeletionSuccessful) router.push('/login')
         }
     )
 
@@ -142,6 +145,7 @@ function Header() {
                         message: data.message
                     })
                 } else {
+                    setIsAccountDeletionSuccessful(true)
                     setResponseModalData({
                         title: 'Success',
                         message:
