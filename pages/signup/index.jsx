@@ -15,6 +15,7 @@ import useModal from '../../hooks/useModal'
 import Loader from '../../components/Ui/Loader/Loader'
 import PasswordInput from '../../components/Ui/PasswordInput/PasswordInput'
 import useInputWithHelp from '../../hooks/useInputWithHelp'
+import Icon from '../../components/Ui/Icon/Icon'
 
 function SignupPage() {
     const router = useRouter()
@@ -186,7 +187,11 @@ function SignupPage() {
                 {isModalOpen && (
                     <Modal
                         title={responseData.title}
-                        headerIcon='info'
+                        headerIcon={
+                            responseData.isSignupSuccessful
+                                ? 'infoSuccess'
+                                : 'infoFailure'
+                        }
                         message={responseData.message}
                         buttonTitle='Ok'
                         buttonType='filled'

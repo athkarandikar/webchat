@@ -84,7 +84,7 @@ function Header() {
         }
     )
 
-    const [isAccountDeletionSuccessful, setIsAccountDeletionSuccessful] =
+    const [isDeletingAccountSuccessful, setIsDeletingAccountSuccessful] =
         useState(false)
 
     const {
@@ -94,7 +94,7 @@ function Header() {
     } = useModal(
         () => {},
         () => {
-            if (isAccountDeletionSuccessful) router.push('/login')
+            if (isDeletingAccountSuccessful) router.push('/login')
         }
     )
 
@@ -145,7 +145,7 @@ function Header() {
                         message: data.message
                     })
                 } else {
-                    setIsAccountDeletionSuccessful(true)
+                    setIsDeletingAccountSuccessful(true)
                     setResponseModalData({
                         title: 'Success',
                         message:
@@ -224,7 +224,7 @@ function Header() {
                 {isAddUserResponseModalOpen && (
                     <Modal
                         title={responseModalData.title}
-                        headerIcon='info'
+                        headerIcon='infoFailure' // bacause the response modal is only used for failure
                         buttonType='filled'
                         buttonTitle='Ok'
                         message={responseModalData.message}
@@ -237,7 +237,7 @@ function Header() {
                 {isDeleteAccountModalOpen && (
                     <Modal
                         title='Delete Account'
-                        headerIcon='newUser'
+                        headerIcon='trashRed'
                         buttonTitle='Delete'
                         buttonType='caution--filled'
                         handleClose={justCloseDeleteAccountModal}
@@ -265,10 +265,10 @@ function Header() {
                                 title={
                                     <label
                                         htmlFor='delete-confirmation'
-                                        className='heading-6 medium'
+                                        className='paragraph regular'
                                     >
                                         Enter&nbsp;
-                                        <span className='heading-6 bold'>
+                                        <span className='paragraph bold'>
                                             delete my account
                                         </span>
                                     </label>
@@ -290,7 +290,11 @@ function Header() {
                 {isDeleteAccountResponseModalOpen && (
                     <Modal
                         title={responseModalData.title}
-                        headerIcon='info'
+                        headerIcon={
+                            isDeletingAccountSuccessful
+                                ? 'infoSuccess'
+                                : 'infoFailure'
+                        }
                         buttonType='filled'
                         buttonTitle='Ok'
                         message={responseModalData.message}

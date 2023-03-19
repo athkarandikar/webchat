@@ -25,9 +25,10 @@ function LoginPage() {
 
     const {isModalOpen, openModal, closeModal} = useModal()
 
+    const [isLoginSuccessful, setIsLoginSuccessful] = useState(false)
+
     // response data from login-user api
     const [responseData, setResponseData] = useState({
-        isLoginSuccessful: false,
         title: '',
         message: ''
     })
@@ -78,6 +79,7 @@ function LoginPage() {
             setResponseData(data)
 
             if (data.isLoginSuccessful) {
+                setIsLoginSuccessful(true)
                 dispatch(
                     authActions.login({
                         username,
@@ -138,7 +140,9 @@ function LoginPage() {
                 {isModalOpen && (
                     <Modal
                         title={responseData.title}
-                        headerIcon='info'
+                        headerIcon={
+                            isLoginSuccessful ? 'infoSuccess' : 'infoFailure'
+                        }
                         message={responseData.message}
                         buttonTitle='Ok'
                         buttonType='filled'

@@ -158,7 +158,7 @@ function MessageArea(props, ref) {
                 {isSendMessageResponseModalOpen && (
                     <Modal
                         title={sendMessageModalData.title}
-                        headerIcon='info'
+                        headerIcon='infoFailure' // bacause the modal is used only for failure
                         message={sendMessageModalData.message}
                         buttonTitle='Ok'
                         buttonType='filled'
@@ -171,7 +171,7 @@ function MessageArea(props, ref) {
                 {isAnalyzeSentimentResponseModalOpen && (
                     <Modal
                         title={analyzeSentimentModalData.title}
-                        headerIcon='info'
+                        headerIcon='infoFailure' // bacause the modal is used only for failure
                         message={analyzeSentimentModalData.message}
                         buttonTitle='Ok'
                         buttonType='filled'

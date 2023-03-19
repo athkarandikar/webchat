@@ -246,6 +246,70 @@ export const info = (
     </svg>
 )
 
+export const infoSuccess = (
+    <svg
+        width='22'
+        height='22'
+        viewBox='0 0 22 22'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+    >
+        <path
+            d='M11 21C16.5228 21 21 16.5228 21 11C21 5.47715 16.5228 1 11 1C5.47715 1 1 5.47715 1 11C1 16.5228 5.47715 21 11 21Z'
+            stroke='#5AA74D'
+            strokeWidth='2'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+        />
+        <path
+            d='M11 15V11'
+            stroke='#5AA74D'
+            strokeWidth='2'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+        />
+        <path
+            d='M11 7H11.01'
+            stroke='#5AA74D'
+            strokeWidth='2'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+        />
+    </svg>
+)
+
+export const infoFailure = (
+    <svg
+        width='22'
+        height='22'
+        viewBox='0 0 22 22'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+    >
+        <path
+            d='M11 21C16.5228 21 21 16.5228 21 11C21 5.47715 16.5228 1 11 1C5.47715 1 1 5.47715 1 11C1 16.5228 5.47715 21 11 21Z'
+            stroke='#DE7676'
+            strokeWidth='2'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+        />
+        <path
+            d='M11 15V11'
+            stroke='#DE7676'
+            strokeWidth='2'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+        />
+        <path
+            d='M11 7H11.01'
+            stroke='#DE7676'
+            strokeWidth='2'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+        />
+    </svg>
+)
+
 export const analysis = (
     <svg
         width='23'
@@ -275,6 +339,31 @@ export const check = (
         <path
             d='M12.5 1.5L4.9375 8.5L1.5 5.31818'
             stroke='#E0E9F7'
+            strokeWidth='2'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+        />
+    </svg>
+)
+
+export const trashRed = (
+    <svg
+        width='21'
+        height='22'
+        viewBox='0 0 21 22'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+    >
+        <path
+            d='M1.5 5H3.5H19.5'
+            stroke='#DE7676'
+            strokeWidth='2'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+        />
+        <path
+            d='M17.5 5V19C17.5 19.5304 17.2893 20.0391 16.9142 20.4142C16.5391 20.7893 16.0304 21 15.5 21H5.5C4.96957 21 4.46086 20.7893 4.08579 20.4142C3.71071 20.0391 3.5 19.5304 3.5 19V5M6.5 5V3C6.5 2.46957 6.71071 1.96086 7.08579 1.58579C7.46086 1.21071 7.96957 1 8.5 1H12.5C13.0304 1 13.5391 1.21071 13.9142 1.58579C14.2893 1.96086 14.5 2.46957 14.5 3V5'
+            stroke='#DE7676'
             strokeWidth='2'
             strokeLinecap='round'
             strokeLinejoin='round'
