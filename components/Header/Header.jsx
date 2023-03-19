@@ -106,7 +106,15 @@ function Header() {
             resetDeleteConfirmation()
             setIsTermsCheckboxChecked(false)
 
-            if (!isTermsCheckboxChecked || !isDeleteConfirmationValid) return
+            if (!isTermsCheckboxChecked || !isDeleteConfirmationValid) {
+                setResponseModalData({
+                    title: 'Failure',
+                    message:
+                        'You must agree to the terms and conditions and enter the confirmation.'
+                })
+                openDeleteAccountResponseModal()
+                return
+            }
 
             setIsLoading(true)
 
