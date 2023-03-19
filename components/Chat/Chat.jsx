@@ -2,7 +2,6 @@ import Image from 'next/image'
 import {useDispatch, useSelector} from 'react-redux'
 import {homePageActions} from '../../store/homePage/homePage'
 
-import IconButton from '../Ui/IconButton/IconButton'
 import classes from './Chat.module.scss'
 
 function Chat(props) {

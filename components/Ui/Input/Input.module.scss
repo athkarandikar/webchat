@@ -5,6 +5,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
+    width: fit-content;
 
     label {
         color: $white--text;

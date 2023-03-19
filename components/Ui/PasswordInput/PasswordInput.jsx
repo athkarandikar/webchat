@@ -1,7 +1,6 @@
 import {useEffect, useState} from 'react'
 import {motion, AnimatePresence} from 'framer-motion'
 
-import Popper from '../Popper/Popper'
 import PopperNew from '../Popper/PopperNew'
 import Portal from '../Portal/Portal'
 import classesInput from '../Input/Input.module.scss'

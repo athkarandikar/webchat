@@ -1,7 +1,7 @@
-import {AnimatePresence, motion} from 'framer-motion'
+import {AnimatePresence} from 'framer-motion'
 import {useRouter} from 'next/router'
 import Head from 'next/head'
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import {useDispatch} from 'react-redux'
 // import auth, {authActions} from '../../store/auth/auth'
 
@@ -14,10 +14,8 @@ import Logo from '../../components/Logo/Logo'
 import Modal from '../../components/Ui/Modal/Modal'
 import Loader from '../../components/Ui/Loader/Loader'
 import {authActions} from '../../store/auth/auth'
-import {login} from '../../store/auth/auth-actions'
 import PasswordInput from '../../components/Ui/PasswordInput/PasswordInput'
-import {loadChats} from '../../store/chats/chat-actions'
-import {useSelector} from 'react-redux'
+import Checkbox from '../../components/Ui/Checkbox/Checkbox'
 
 function LoginPage() {
     const router = useRouter()

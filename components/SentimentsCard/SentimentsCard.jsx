@@ -1,6 +1,5 @@
-import {useSelector} from 'react-redux'
 import {AnimatePresence} from 'framer-motion'
-import {useState} from 'react'
+import {useSelector} from 'react-redux'
 
 import classes from './SentimentsCard.module.scss'
 import SentimentsCardSentiment from './SentimentsCardSentiment/SentimentsCardSentiment'
@@ -8,7 +7,13 @@ import SentimentsModal from '../SentimentsModal/SentimentsModal'
 import useModal from '../../hooks/useModal'
 
 function Sentiments(props) {
-    const {numMessages} = props
+    const {id: activeChatId} = useSelector(state => state.homePage.activeChat)
+    const numMessages = useSelector(
+        state =>
+            state.chats.chats.find(chat => chat.id === activeChatId).messages
+                .length
+    ) // numMessages will be always greater than 0
+
     const {
         isModalOpen: isSentimentsModalOpen,
         openModal: openSentimentsModal,

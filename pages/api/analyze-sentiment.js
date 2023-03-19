@@ -1,6 +1,6 @@
 import {db} from '../../firebaseConfig'
 import Sentiment from 'sentiment'
-import {collection, doc, getDoc, setDoc, updateDoc} from 'firebase/firestore'
+import {collection, doc, getDoc, updateDoc} from 'firebase/firestore'
 
 const sentimentAnalyzer = new Sentiment()
 

@@ -1,5 +1,4 @@
 import classes from './Message.module.scss'
-import IconButton from '../../Ui/IconButton/IconButton'
 
 function Message(props) {
     // const className = classes[props.type]

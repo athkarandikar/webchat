@@ -9,36 +9,27 @@ function Messages(props) {
             ).messages
     )
 
-    const messages = activeChatMessages ? (
-        activeChatMessages.map(({text, time, type}) => {
-            const timeString = new Date(time).toLocaleTimeString('en-US', {
-                timeStyle: 'short'
-            })
-            // const type = isIncoming ? 'incoming' : 'outgoing'
+    const messages = activeChatMessages
+        ? activeChatMessages.map(({text, time, type}) => {
+              const timeString = new Date(time).toLocaleTimeString('en-US', {
+                  timeStyle: 'short'
+              })
 
-            if (type === 'info')
-                return <Message key={time} type={type} text={text} />
-            else
-                return (
-                    <Message
-                        key={time}
-                        type={type}
-                        time={timeString}
-                        text={text}
-                    />
-                )
-        })
-    ) : (
-        <p style={{color: 'white'}}>No messages yet</p>
-    )
+              if (type === 'info')
+                  return <Message key={time} type={type} text={text} />
+              else
+                  return (
+                      <Message
+                          key={time}
+                          type={type}
+                          time={timeString}
+                          text={text}
+                      />
+                  )
+          })
+        : []
 
-    return (
-        <>
-            {/* <Message type='incoming' />
-            <Message type='outgoing' /> */}
-            {messages}
-        </>
-    )
+    return <>{messages ? messages : <></>}</>
 }
 
 export default Messages

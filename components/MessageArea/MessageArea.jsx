@@ -1,7 +1,6 @@
 import Image from 'next/image'
-import {motion, AnimatePresence} from 'framer-motion'
+import {AnimatePresence} from 'framer-motion'
 import {useSelector} from 'react-redux'
-import Sentiment from 'sentiment'
 
 import SentimentsCard from '../SentimentsCard/SentimentsCard'
 import IconButton from '../Ui/IconButton/IconButton'
@@ -9,17 +8,12 @@ import classes from './MessageArea.module.scss'
 import React, {useEffect, useRef, useState} from 'react'
 import Messages from '../Messages/Messages/Messages'
 import useInput from '../../hooks/useInput'
-import useAutoFocus from '../../hooks/useAutoFocus'
-import {useDispatch} from 'react-redux'
-import {sendMessage} from '../../store/chats/chat-actions'
 import useModal from '../../hooks/useModal'
 import Modal from '../Ui/Modal/Modal'
 
 // const MotionIconButton = motion(IconButton)
 
 function MessageArea(props, ref) {
-    // let numMessages = 0
-
     const {name: chatName} = useSelector(state => state.homePage.activeChat)
     const {userId} = useSelector(state => state.auth)
     const {username} = useSelector(state => state.auth)
@@ -27,12 +21,14 @@ function MessageArea(props, ref) {
     const {sentiments = null} = useSelector(state =>
         state.chats.chats.find(chat => chat.id === activeChatId)
     )
-    const numMessages = useSelector(
-        state =>
-            state.chats.chats.find(chat => chat.id === activeChatId).messages
-                .length
-    ) // numMessages will be always greater than 0
+
     const inputRef = useRef(null)
+    const messagesContainerRef = useRef(null)
+
+    // scroll to the bottom of messages container
+    if (messagesContainerRef.current)
+        messagesContainerRef.current.scrollTop =
+            messagesContainerRef.current.scrollHeight
 
     const {
         value: message,
@@ -71,8 +67,6 @@ function MessageArea(props, ref) {
         if (inputRef.current) inputRef.current.focus()
         resetMessage()
     }, [chatName])
-
-    // useEffect(() => {}, [numMessages])
 
     async function messageSendHandler(e) {
         e.stopPropagation()
@@ -113,6 +107,13 @@ function MessageArea(props, ref) {
                 openSendMessageResponseModal()
             }
         }
+
+        // Scroll to the bottom of the messages container
+        if (messagesContainerRef.current)
+            messagesContainerRef.current.scrollTo({
+                top: messagesContainerRef.current.scrollHeight,
+                behavior: 'smooth'
+            })
 
         // Sentiment Analysis
 
@@ -204,10 +205,10 @@ function MessageArea(props, ref) {
                             <SentimentsCard
                                 sentiments={sentiments}
                                 activeChatId={activeChatId}
-                                numMessages={numMessages}
+                                // numMessages={numMessages}
                             />
                         ) : null}
-                        <div className={classes.actions}>
+                        {/* <div className={classes.actions}>
                             <IconButton
                                 className={classes['icon-button']}
                                 icon='arrowRight'
@@ -216,10 +217,13 @@ function MessageArea(props, ref) {
                                 className={classes['icon-button']}
                                 icon='more'
                             />
-                        </div>
+                        </div> */}
                     </div>
                 </header>
-                <div className={classes['messages-container']}>
+                <div
+                    className={classes['messages-container']}
+                    ref={messagesContainerRef}
+                >
                     {/* <Message type='incoming' />
                 <Message type='outgoing' /> */}
                     <Messages />

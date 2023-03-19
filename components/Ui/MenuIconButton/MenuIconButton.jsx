@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef} from 'react'
+import {useState} from 'react'
 import ClickAwayListener from 'react-click-away-listener'
 
 import usePopper from '../../../hooks/usePopper'
@@ -6,9 +6,8 @@ import IconButton from '../IconButton/IconButton'
 import classes from './MenuIconButton.module.scss'
 import PopupMenu from '../PopupMenu/PopupMenu'
 import Portal from '../Portal/Portal'
-import {Popper} from 'react-popper'
 import PopperNew from '../Popper/PopperNew'
-import {AnimatePresence, transform} from 'framer-motion'
+import {AnimatePresence} from 'framer-motion'
 
 function MenuIconButton(props) {
     const [showMenu, setShowMenu] = useState(false)

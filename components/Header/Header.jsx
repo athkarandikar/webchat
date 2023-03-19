@@ -1,20 +1,18 @@
 import {AnimatePresence} from 'framer-motion'
-import {useState} from 'react'
+import React, {useState} from 'react'
 
-import IconButton from '../Ui/IconButton/IconButton'
 import Logo from '../Logo/Logo'
 import classes from './Header.module.scss'
-import PopupMenu from '../Ui/PopupMenu/PopupMenu'
 import Modal from '../../components/Ui/Modal/Modal'
 import useModal from '../../hooks/useModal'
 import Input from '../Ui/Input/Input'
 import useInput from '../../hooks/useInput'
 import MenuIconButton from '../Ui/MenuIconButton/MenuIconButton'
-import {useEffect} from 'react'
-import {useDispatch} from 'react-redux'
 import {useSelector} from 'react-redux'
 import Loader from '../Ui/Loader/Loader'
-import {chatsActions} from '../../store/chats/chats'
+import Checkbox from '../Ui/Checkbox/Checkbox'
+import useCheckbox from '../../hooks/useCheckbox'
+import {useRouter} from 'next/router'
 
 const inputOptions = {
     autoCorrect: 'off',
@@ -24,13 +22,12 @@ const inputOptions = {
 }
 
 function Header() {
-    const dispatch = useDispatch()
+    const router = useRouter()
 
     const currentUsername = useSelector(state => state.auth.username)
     const currentUserId = useSelector(state => state.auth.userId)
 
     const [responseModalData, setResponseModalData] = useState({
-        isAddingUserSuccessful: false,
         title: '',
         message: ''
     })
@@ -38,10 +35,16 @@ function Header() {
     const [isLoading, setIsLoading] = useState(false)
 
     const {
-        isModalOpen: isNewUserModalOpen,
-        openModal: openNewUserModal,
-        closeModal: closeNewUserModal,
-        justCloseModal: justCloseNewUserModal
+        isModalOpen: isAddUserResponseModalOpen,
+        openModal: openAddUserResponseModal,
+        closeModal: closeAddUserResponseModal
+    } = useModal()
+
+    const {
+        isModalOpen: isAddUserModalOpen,
+        openModal: openAddUserModal,
+        closeModal: closeAddUserModal,
+        justCloseModal: justCloseAddUserModal
     } = useModal(
         () => {},
         async () => {
@@ -60,30 +63,20 @@ function Header() {
             let data
             if (!res.ok) {
                 setResponseModalData({
-                    isAddingUserSuccessful: false,
                     title: 'Failure',
                     message:
                         'Some internal error occured. Please try again later.'
                 })
-                openResponseModal()
+                openAddUserResponseModal()
             } else {
                 data = await res.json()
 
-                // if (data.isAddingUserSuccessful) {
-                //     dispatch(
-                //         chatsActions.addUser({
-                //             username,
-                //             id: data.id,
-                //             name: data.name
-                //         })
-                //     )
-                // } else {
-                //     setResponseModalData(data)
-                //     openResponseModal()
-                // }
                 if (!data.isAddingUserSuccessful) {
-                    setResponseModalData(data)
-                    openResponseModal()
+                    setResponseModalData({
+                        title: data.title,
+                        message: data.message
+                    })
+                    openAddUserResponseModal()
                 }
             }
 
@@ -92,10 +85,67 @@ function Header() {
     )
 
     const {
-        isModalOpen: isResponseModalOpen,
-        openModal: openResponseModal,
-        closeModal: closeResponseModal
-    } = useModal()
+        isModalOpen: isDeleteAccountResponseModalOpen,
+        openModal: openDeleteAccountResponseModal,
+        closeModal: closeDeleteAccountResponseModal
+    } = useModal(
+        () => {},
+        () => {
+            router.push('/login')
+        }
+    )
+
+    const {
+        isModalOpen: isDeleteAccountModalOpen,
+        openModal: openDeleteAccountModal,
+        closeModal: closeDeleteAccountModal,
+        justCloseModal: justCloseDeleteAccountModal
+    } = useModal(
+        () => {},
+        async () => {
+            resetDeleteConfirmation()
+            setIsTermsCheckboxChecked(false)
+
+            if (!isTermsCheckboxChecked || !isDeleteConfirmationValid) return
+
+            setIsLoading(true)
+
+            const res = await fetch('/api/delete-account', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(currentUserId)
+            })
+
+            let data
+            if (!res.ok) {
+                setResponseModalData({
+                    title: 'Failure',
+                    message:
+                        'Some internal error occured. Please try again later.'
+                })
+            } else {
+                data = await res.json()
+
+                if (!data.isDeletingAccountSuccessful) {
+                    setResponseModalData({
+                        title: data.title,
+                        message: data.message
+                    })
+                } else {
+                    setResponseModalData({
+                        title: 'Success',
+                        message:
+                            'Your account and your data has been deleted. You will now be logged out.'
+                    })
+                }
+            }
+
+            openDeleteAccountResponseModal()
+            setIsLoading(false)
+        }
+    )
 
     const {
         value: username,
@@ -107,20 +157,38 @@ function Header() {
         reset: resetUsername
     } = useInput(value => value.trim() !== '')
 
+    const {
+        value: deleteConfirmation,
+        isTouched: isDeleteConfirmationTouched,
+        isValid: isDeleteConfirmationValid,
+        isInvalid: isDeleteConfirmationInvalid,
+        valueChangeHandler: deleteConfirmationChangeHandler,
+        inputBlurHandler: deleteConfirmationBlurHandler,
+        reset: resetDeleteConfirmation
+    } = useInput(value => value.trim() === 'delete my account')
+
+    const {
+        isChecked: isTermsCheckboxChecked,
+        setIsChecked: setIsTermsCheckboxChecked
+    } = useCheckbox(false)
+
+    function termsCheckboxChangeHandler() {
+        setIsTermsCheckboxChecked(!isTermsCheckboxChecked)
+    }
+
     return (
         // create a function to handle modals of all the menu options, after adding more menu options
         <>
             {isLoading && <Loader />}
             <AnimatePresence key='newUserModal'>
-                {isNewUserModalOpen && (
+                {isAddUserModalOpen && (
                     <Modal
                         title='New Chat'
                         headerIcon='newUser'
                         buttonTitle='Ok'
                         buttonType='filled'
-                        isSubmitButton={true}
-                        handleClose={justCloseNewUserModal}
-                        buttonOnClick={closeNewUserModal}
+                        handleClose={justCloseAddUserModal}
+                        buttonOnClick={closeAddUserModal}
                     >
                         <Input
                             autoFocus={true}
@@ -139,25 +207,93 @@ function Header() {
                         />
                     </Modal>
                 )}
-                <AnimatePresence key='responseModal'>
-                    {isResponseModalOpen && (
-                        <Modal
-                            title={responseModalData.title}
-                            headerIcon='info'
-                            message={responseModalData.message}
-                            handleClose={closeResponseModal}
-                            buttonOnClick={closeResponseModal}
-                        />
-                    )}
-                </AnimatePresence>
+            </AnimatePresence>
+            <AnimatePresence key='addUserResponseModal'>
+                {isAddUserResponseModalOpen && (
+                    <Modal
+                        title={responseModalData.title}
+                        headerIcon='info'
+                        buttonType='filled'
+                        buttonTitle='Ok'
+                        message={responseModalData.message}
+                        handleClose={closeAddUserResponseModal}
+                        buttonOnClick={closeAddUserResponseModal}
+                    />
+                )}
+            </AnimatePresence>
+            <AnimatePresence key='deleteAccountModal'>
+                {isDeleteAccountModalOpen && (
+                    <Modal
+                        title='Delete Account'
+                        headerIcon='newUser'
+                        buttonTitle='Delete'
+                        buttonType='caution--filled'
+                        handleClose={justCloseDeleteAccountModal}
+                        buttonOnClick={closeDeleteAccountModal}
+                    >
+                        <div className={classes['delete-form']}>
+                            <div className={classes.terms}>
+                                <p
+                                    className={`paragraph regular ${classes.paragraph}`}
+                                >
+                                    Your account and your data will be deleted
+                                    immediately.
+                                </p>
+                                <Checkbox
+                                    text='I understand the above'
+                                    id='terms'
+                                    isChecked={isTermsCheckboxChecked}
+                                    onChange={termsCheckboxChangeHandler}
+                                />
+                            </div>
+                            <Input
+                                value={deleteConfirmation}
+                                onBlur={deleteConfirmationBlurHandler}
+                                onChange={deleteConfirmationChangeHandler}
+                                title={
+                                    <label
+                                        htmlFor='delete-confirmation'
+                                        className='heading-6 medium'
+                                    >
+                                        Enter&nbsp;
+                                        <span className='heading-6 bold'>
+                                            delete my account
+                                        </span>
+                                    </label>
+                                }
+                                id='delete-confirmation'
+                                type='text'
+                                options={inputOptions}
+                                errorText={
+                                    isDeleteConfirmationInvalid
+                                        ? 'Enter a valid confirmation'
+                                        : ''
+                                }
+                            />
+                        </div>
+                    </Modal>
+                )}
+            </AnimatePresence>
+            <AnimatePresence key='deleteAccountResponseModal'>
+                {isDeleteAccountResponseModalOpen && (
+                    <Modal
+                        title={responseModalData.title}
+                        headerIcon='info'
+                        buttonType='filled'
+                        buttonTitle='Ok'
+                        message={responseModalData.message}
+                        handleClose={closeDeleteAccountResponseModal}
+                        buttonOnClick={closeDeleteAccountResponseModal}
+                    />
+                )}
             </AnimatePresence>
             <div className={classes.header}>
                 <Logo className={classes['container-logo']} type='full' />
                 <div className={classes.actions}>
-                    <IconButton
+                    {/* <IconButton
                         className={classes['icon-button']}
                         icon='user'
-                    />
+                    /> */}
                     <MenuIconButton
                         iconButtonClassName={classes['icon-button']}
                         icon='more'
@@ -166,7 +302,14 @@ function Header() {
                                 text: 'New User',
                                 icon: 'newUser',
                                 onClick: () => {
-                                    openNewUserModal()
+                                    openAddUserModal()
+                                }
+                            },
+                            {
+                                text: 'Delete Account',
+                                icon: 'newUser',
+                                onClick: () => {
+                                    openDeleteAccountModal()
                                 }
                             }
                         ]}

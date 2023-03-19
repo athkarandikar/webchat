@@ -1,5 +1,4 @@
-import {useReducer, useState} from 'react'
-import {usePopper} from 'react-popper'
+import {useReducer} from 'react'
 
 const initialInputState = {
     value: '',

@@ -4,10 +4,7 @@ import {
     where,
     getDocs,
     query,
-    updateDoc,
-    getDoc,
-    doc
-} from 'firebase/firestore'
+    updateDoc} from 'firebase/firestore'
 
 function validateData({username, password}) {
     // TODO: input validation (eg username length, password length)

@@ -2,6 +2,9 @@
 
 .popup-menu {
     border: 1px solid $gray--outline;
+    width: max-content;
+    display: flex;
+    flex-direction: column;
     border-radius: 5px;
     overflow: hidden;
     background-color: $primary--primary;

@@ -1,4 +1,3 @@
-// import Image from 'next/image'
 import Icon from '../Icon/Icon'
 
 import classes from './Button.module.scss'

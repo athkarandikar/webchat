@@ -263,3 +263,21 @@ export const analysis = (
         />
     </svg>
 )
+
+export const check = (
+    <svg
+        width='14'
+        height='10'
+        viewBox='0 0 14 10'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+    >
+        <path
+            d='M12.5 1.5L4.9375 8.5L1.5 5.31818'
+            stroke='#E0E9F7'
+            strokeWidth='2'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+        />
+    </svg>
+)

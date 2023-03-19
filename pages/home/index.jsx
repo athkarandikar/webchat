@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import {AnimatePresence} from 'framer-motion'
 
 import classes from './home.module.scss'
 import ChatList from '../../components/ChatList/ChatList'
@@ -8,7 +7,6 @@ import {useRouter} from 'next/router'
 import {useEffect, useState} from 'react'
 import {useSelector} from 'react-redux'
 import {useDispatch} from 'react-redux'
-import {authActions} from '../../store/auth/auth'
 import Loader from '../../components/Ui/Loader/Loader'
 import {logout} from '../../store/auth/auth-actions'
 import {receiveRealTimeUpdates} from '../../store/chats/chat-actions'

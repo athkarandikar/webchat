@@ -27,3 +27,19 @@
         }
     }
 }
+
+.delete-form {
+    display: flex;
+    flex-direction: column;
+    gap: 3.2rem;
+
+    .terms {
+        display: flex;
+        flex-direction: column;
+        gap: 1.6rem;
+    }
+
+    p {
+        color: $white--text;
+    }
+}

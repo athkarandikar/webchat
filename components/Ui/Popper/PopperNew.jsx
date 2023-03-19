@@ -1,7 +1,5 @@
-import {AnimatePresence} from 'framer-motion'
 import {motion} from 'framer-motion'
 import React from 'react'
-import {useEffect} from 'react'
 import classes from './PopperNew.module.scss'
 
 const popperNew = React.forwardRef(function popperNew(props, ref) {

@@ -1,3 +1,4 @@
+import React from 'react'
 import classes from './Icon.module.scss'
 import * as svgs from './Svgs'
 

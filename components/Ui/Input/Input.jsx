@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef} from 'react'
+import React, {useState, useEffect} from 'react'
 import {motion, AnimatePresence} from 'framer-motion'
 
 import classes from './Input.module.scss'
@@ -41,9 +41,14 @@ function Input(props) {
 
     return (
         <div key={props.id} className={classes.input}>
-            <label htmlFor={props.id} className='heading-6 medium'>
-                {props.title}
-            </label>
+            {React.isValidElement(props.title) ? (
+                props.title
+            ) : (
+                <label htmlFor={props.id} className='heading-6 medium'>
+                    {props.title}
+                </label>
+            )}
+
             <input
                 ref={inputRef}
                 value={props.value}
