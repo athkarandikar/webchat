@@ -165,7 +165,7 @@ function LoginPage() {
                             options={{
                                 autoCorrect: 'off',
                                 spellCheck: 'false',
-                                autoComplete: 'off',
+                                autoComplete: 'on',
                                 autoCapitalize: 'off'
                             }}
                             errorText={
@@ -186,9 +186,9 @@ function LoginPage() {
                                     ? 'Enter a valid password'
                                     : ''
                             }
-                            options={{
-                                autoComplete: 'current-password'
-                            }}
+                            // options={{
+                            //     autoComplete: 'current-password'
+                            // }}
                         />
                     </div>
                     <div className={classes.actions}>
