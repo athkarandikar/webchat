@@ -16,13 +16,6 @@ import Loader from '../../components/Ui/Loader/Loader'
 import PasswordInput from '../../components/Ui/PasswordInput/PasswordInput'
 import useInputWithHelp from '../../hooks/useInputWithHelp'
 
-const inputOptions = {
-    autoCorrect: 'off',
-    spellCheck: 'false',
-    autoComplete: 'off',
-    autoCapitalize: 'off'
-}
-
 function SignupPage() {
     const router = useRouter()
 
@@ -216,7 +209,12 @@ function SignupPage() {
                             title='First Name'
                             id='first-name'
                             type='text'
-                            options={inputOptions}
+                            options={{
+                                autoCorrect: 'off',
+                                spellCheck: 'false',
+                                autoComplete: 'given-name',
+                                autoCapitalize: 'on'
+                            }}
                             errorText={
                                 isFirstNameInvalid
                                     ? 'Enter a valid first name'
@@ -230,7 +228,12 @@ function SignupPage() {
                             title='Last Name'
                             id='last-name'
                             type='text'
-                            options={inputOptions}
+                            options={{
+                                autoCorrect: 'off',
+                                spellCheck: 'false',
+                                autoComplete: 'family-name',
+                                autoCapitalize: 'on'
+                            }}
                             errorText={
                                 isLastNameInvalid
                                     ? 'Enter a valid last name'
@@ -259,6 +262,12 @@ function SignupPage() {
                             title='Email Address'
                             id='email'
                             type='email'
+                            options={{
+                                autoCorrect: 'off',
+                                spellCheck: 'false',
+                                autoComplete: 'email',
+                                autoCapitalize: 'off'
+                            }}
                             errorText={
                                 isEmailInvalid ? 'Enter a valid email' : ''
                             }
@@ -270,7 +279,12 @@ function SignupPage() {
                             title='Username'
                             id='username'
                             type='text'
-                            options={inputOptions}
+                            options={{
+                                autoCorrect: 'off',
+                                spellCheck: 'false',
+                                autoComplete: 'off',
+                                autoCapitalize: 'off'
+                            }}
                             errorText={
                                 isUsernameInvalid
                                     ? 'Enter a valid username'
@@ -284,7 +298,12 @@ function SignupPage() {
                             title='Password'
                             id='password'
                             type='password'
-                            options={{autoComplete: 'new-password'}}
+                            options={{
+                                autoCorrect: 'off',
+                                spellCheck: 'false',
+                                autoComplete: 'new-password',
+                                autoCapitalize: 'off'
+                            }}
                             errorText={
                                 isPasswordInvalid
                                     ? 'Enter a valid password'

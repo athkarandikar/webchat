@@ -21,6 +21,7 @@ function PhoneInput(props) {
                 className={`paragraph regular ${
                     props.errorText && classesInput['input--error']
                 }`}
+                autoComplete='tel'
             />
             <AnimatePresence>
                 {props.errorText && (

@@ -1,4 +1,4 @@
-import {deleteDoc, doc} from 'firebase/firestore'
+import {collection, deleteDoc, doc, getDoc} from 'firebase/firestore'
 import {db} from '../../firebaseConfig'
 
 export default async function handler(req, res) {
@@ -12,8 +12,17 @@ export default async function handler(req, res) {
         })
     }
 
-    // delete the user
-    deleteDoc(doc(db, 'users', userId))
+    // delete data from the database
+
+    const userRef = doc(db, 'users', userId)
+    const chatsRef = doc(collection(userRef, 'chats'), 'chats')
+
+    // delete the subcollections of the user
+    const chatsDoc = await getDoc(chatsRef)
+    if (chatsDoc.exists()) deleteDoc(chatsRef)
+
+    // delete the user document
+    deleteDoc(userRef)
 
     return res.status(201).json({
         isDeletingAccountSuccessful: true
