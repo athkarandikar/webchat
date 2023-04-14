@@ -79,7 +79,8 @@ function HomePage() {
 
         // this function logs out the user if any other page is visited (when the HomePage component is unmounted)
         return () => {
-            if (!isAuthenticated) return
+            // if the user is not authenticated or if the base path is home, then don't log out the user
+            if (!isAuthenticated || router.asPath === '/home') return
             setIsLoading(true)
 
             dispatch(logout(userId))

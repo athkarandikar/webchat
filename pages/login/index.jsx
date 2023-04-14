@@ -83,7 +83,12 @@ function LoginPage() {
                 dispatch(
                     authActions.login({
                         username,
-                        userId: data.userId
+                        userId: data.userId,
+                        firstName: data.firstName,
+                        lastName: data.lastName,
+                        phoneNumber: data.phoneNumber,
+                        email: data.email,
+                        password: data.password
                     })
                 )
                 // dispatch(loadChats(data.userId))

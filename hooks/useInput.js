@@ -21,11 +21,11 @@ const inputStateReducer = (state, action) => {
 
 /* parameters:
     validateInput: a function that takes the input value and returns true if the input is valid
-    help: a boolean that determines whether the input should have a help element to display help text when the input is invalid
+    value: the initial value of the input (empty string by default)
 */
 
-const useInput = validateInput => {
-    // VALIDATION
+const useInput = (validateInput, value = '') => {
+    initialInputState.value = value
 
     const [inputState, dispatch] = useReducer(
         inputStateReducer,
@@ -47,59 +47,7 @@ const useInput = validateInput => {
         dispatch({type: 'RESET'})
     }
 
-    // HELP ELEMENT
-
-    // let referenceElement,
-    //     setReferenceElement,
-    //     popperElement,
-    //     setPopperElement,
-    //     styles,
-    //     attributes
-
-    // if (help) {
-    //     let referenceElementValue = useState(null)
-    //     referenceElement = referenceElementValue[0]
-    //     setReferenceElement = referenceElementValue[1]
-
-    //     let popperElementValue = useState(null)
-    //     popperElement = popperElementValue[0]
-    //     setPopperElement = popperElementValue[1]
-    //     // const [arrowElement, setArrowElement] = useState(null)
-    //     let usePopperReturnValue = usePopper(referenceElement, popperElement, {
-    //         placement: helpPopperPosition,
-    //         modifiers: [
-    //             {
-    //                 name: 'offset',
-    //                 options: {
-    //                     offset: [0, 12]
-    //                 }
-    //             }
-    //         ]
-    //     })
-    //     styles = usePopperReturnValue.styles
-    //     attributes = usePopperReturnValue.attributes
-    // }
-
-    // return {
-    //     // VALIDATION
-    //     value: inputState.value,
-    //     isValid,
-    //     isInvalid,
-    //     valueChangeHandler,
-    //     inputBlurHandler,
-    //     reset,
-    //     // HELP ELEMENT
-    //     referenceElement,
-    //     setReferenceElement,
-    //     popperElement,
-    //     setPopperElement,
-    //     helpPopperPosition,
-    //     styles,
-    //     attributes
-    // }
-
     return {
-        // VALIDATION
         value: inputState.value,
         isTouched: inputState.isTouched,
         isValid,

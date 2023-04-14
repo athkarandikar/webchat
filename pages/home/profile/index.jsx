@@ -2,45 +2,58 @@ import {useRouter} from 'next/router'
 import Head from 'next/head'
 import {AnimatePresence} from 'framer-motion'
 import {useState} from 'react'
+import Image from 'next/image'
 
-import classes from './signup.module.scss'
-import PhoneInput from '../../components/Ui/PhoneInput/PhoneInput'
-import Button from '../../components/Ui/Button/Button'
-import useInput from '../../hooks/useInput'
-import Input from '../../components/Ui/Input/Input'
-import usePhoneInput from '../../hooks/usePhoneInput'
-import Logo from '../../components/Logo/Logo'
-import Modal from '../../components/Ui/Modal/Modal'
-import useModal from '../../hooks/useModal'
-import Loader from '../../components/Ui/Loader/Loader'
-import PasswordInput from '../../components/Ui/PasswordInput/PasswordInput'
-import useInputWithHelp from '../../hooks/useInputWithHelp'
-import Icon from '../../components/Ui/Icon/Icon'
+import classes from './profile.module.scss'
+import PhoneInput from '../../../components/Ui/PhoneInput/PhoneInput'
+import Button from '../../../components/Ui/Button/Button'
+import useInput from '../../../hooks/useInput'
+import Input from '../../../components/Ui/Input/Input'
+import usePhoneInput from '../../../hooks/usePhoneInput'
+import Logo from '../../../components/Logo/Logo'
+import Modal from '../../../components/Ui/Modal/Modal'
+import useModal from '../../../hooks/useModal'
+import Loader from '../../../components/Ui/Loader/Loader'
+import PasswordInput from '../../../components/Ui/PasswordInput/PasswordInput'
+import useInputWithHelp from '../../../hooks/useInputWithHelp'
+import {useDispatch, useSelector} from 'react-redux'
+import {authActions} from '../../../store/auth/auth'
 
-function SignupPage() {
+function Profile() {
     const router = useRouter()
+    const dispatch = useDispatch()
+
+    const userId = useSelector(state => state.auth.userId)
 
     const {isModalOpen, openModal, closeModal} = useModal(
         () => {},
         () => {
-            if (responseData.isSignupSuccessful) router.push('/login')
+            if (isUpdateSuccessful) router.push('/home')
         }
     )
 
-    // response data from signup-user api
+    // response data from update-profile api
+    const [isUpdateSuccessful, setIsUpdateSuccessful] = useState(false)
+
+    // response data from login-user api
     const [responseData, setResponseData] = useState({
-        isSignupSuccessful: false,
         title: '',
         message: ''
     })
 
     const [isLoading, setIsLoading] = useState(false)
 
-    async function signupHandler(event) {
+    function handleModalClose() {
+        closeModal()
+    }
+
+    const authState = useSelector(state => state.auth)
+
+    async function saveChangesHandler(event) {
         event.preventDefault()
         setIsLoading(true)
 
-        const signupData = {
+        const newAuthData = {
             firstName,
             lastName,
             phoneNumber,
@@ -49,42 +62,50 @@ function SignupPage() {
             password
         }
 
-        const res = await fetch('/api/signup-user', {
+        if (
+            authState.firstName === firstName ||
+            authState.lastName === lastName ||
+            authState.phoneNumber === phoneNumber ||
+            authState.email === email ||
+            authState.username === username ||
+            authState.password === password
+        ) {
+            setResponseData({
+                title: 'Failure',
+                message:
+                    'You did not change any of your details. Your profile details have not been affected.'
+            })
+            openModal()
+            return
+        }
+
+        const res = await fetch('/api/update-profile', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(signupData)
+            body: JSON.stringify({userId, oldAuthData: authState, newAuthData})
         })
-
         let data
         if (!res.ok) {
             setResponseData({
-                isSignupSuccessful: false,
                 title: 'Failure',
                 message: 'Some internal error occured. Please try again later.'
             })
         } else {
             data = await res.json()
-            setResponseData(data)
-        }
+            const {isUpdateSuccessful, title, message} = data
+            setResponseData({title, message})
 
+            if (isUpdateSuccessful) {
+                setIsUpdateSuccessful(isUpdateSuccessful)
+                dispatch(authActions.updateProfile(newAuthData))
+            }
+        }
         setIsLoading(false)
         openModal() // shows a modal with either a success or an error message
-
-        // if (data.isSignupSuccessful) {
-        //     resetFirstName()
-        //     resetLastName()
-        //     resetPhoneNumber()
-        //     resetEmail()
-        //     resetUsername()
-        //     resetPassword()
-        // }
     }
 
-    function handleModalClose() {
-        closeModal()
-    }
     // TODO: input validation
     const {
         value: firstName,
@@ -93,7 +114,7 @@ function SignupPage() {
         valueChangeHandler: firstNameChangeHandler,
         inputBlurHandler: firstNameBlurHandler,
         reset: resetFirstName
-    } = useInput(value => value.trim() !== '')
+    } = useInput(value => value.trim() !== '', authState.firstName)
 
     const {
         value: lastName,
@@ -102,7 +123,7 @@ function SignupPage() {
         valueChangeHandler: lastNameChangeHandler,
         inputBlurHandler: lastNameBlurHandler,
         reset: resetLastName
-    } = useInput(value => value.trim() !== '')
+    } = useInput(value => value.trim() !== '', authState.lastName)
     // TODO: style the dropdown menu (select) while choosing country code
     const {
         phoneNumber,
@@ -111,7 +132,7 @@ function SignupPage() {
         valueChangeHandler: phoneNumberChangeHandler,
         inputBlurHandler: phoneNumberBlurHandler,
         reset: resetPhoneNumber
-    } = usePhoneInput()
+    } = usePhoneInput(authState.phoneNumber)
 
     const {
         value: email,
@@ -121,14 +142,16 @@ function SignupPage() {
         inputBlurHandler: emailBlurHandler,
         reset: resetEmail
         // } = useInput(value => value.trim() !== '')
-    } = useInput(value =>
-        value
-            .trim()
-            .match(
-                new RegExp(
-                    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-                )
-            )
+    } = useInput(
+        value =>
+            value
+                .trim()
+                .match(
+                    new RegExp(
+                        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                    )
+                ),
+        authState.email
     )
 
     const {
@@ -138,7 +161,7 @@ function SignupPage() {
         valueChangeHandler: usernameChangeHandler,
         inputBlurHandler: usernameBlurHandler,
         reset: resetUsername
-    } = useInput(value => value.trim() !== '')
+    } = useInput(value => value.trim() !== '', authState.username)
 
     const {
         value: password,
@@ -163,16 +186,16 @@ function SignupPage() {
                         /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[~`!@#$%^&*()_\-+={[}\]|\\:;"'<,>.?/])[a-zA-Z0-9~`!@#$%^&*()_\-+={[}\]|\\:;"'<,>.?/]{8,20}$/
                     )
                 ),
-        // true, // help element is needed
+        authState.password,
         'left',
         12
     )
 
-    function btnCancelHandler(e) {
-        e.preventDefault()
-        setIsLoading(true)
-        router.push('/login')
-        setIsLoading(false)
+    function btnHomeHandler(e) {
+        // e.preventDefault()
+        // setIsLoading(true)
+        router.push('/home')
+        // setIsLoading(false)
     }
 
     return (
@@ -180,7 +203,7 @@ function SignupPage() {
             {isLoading && <Loader />}
 
             <Head>
-                <title>Sign Up</title>
+                <title>Profile</title>
             </Head>
 
             <AnimatePresence>
@@ -188,9 +211,7 @@ function SignupPage() {
                     <Modal
                         title={responseData.title}
                         headerIcon={
-                            responseData.isSignupSuccessful
-                                ? 'infoSuccess'
-                                : 'infoFailure'
+                            isUpdateSuccessful ? 'infoSuccess' : 'infoFailure'
                         }
                         message={responseData.message}
                         buttonTitle='Ok'
@@ -200,11 +221,22 @@ function SignupPage() {
                     />
                 )}
             </AnimatePresence>
-            <div className={classes.signup}>
+            <div className={classes.profile}>
                 <Logo className={classes['container-logo']} type='full' />
+
+                <div className={classes['container-profile-image']}>
+                    <Image
+                        className={classes['profile-image']}
+                        src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80'
+                        alt='Profile photo'
+                        layout='fill'
+                        objectFit='cover'
+                    />
+                </div>
+
                 <form
-                    className={classes['form-signup']}
-                    onSubmit={signupHandler}
+                    className={classes['form-profile']}
+                    onSubmit={saveChangesHandler}
                 >
                     <div className={classes.inputs}>
                         <Input
@@ -324,12 +356,12 @@ function SignupPage() {
                     </div>
                     <div className={classes.actions}>
                         <Button
-                            title='Cancel'
+                            title='Home'
                             type='outlined'
-                            onClick={btnCancelHandler}
+                            onClick={btnHomeHandler}
                         />
                         <Button
-                            title='Sign Up'
+                            title='Save Changes'
                             type='filled'
                             icon='arrowRight'
                             isSubmitButton={true}
@@ -337,10 +369,8 @@ function SignupPage() {
                     </div>
                 </form>
             </div>
-
-            {/* {passwordHelp} */}
         </>
     )
 }
 
-export default SignupPage
+export default Profile

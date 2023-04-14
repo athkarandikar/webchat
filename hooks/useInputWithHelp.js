@@ -3,6 +3,7 @@ import usePopper from './usePopper'
 
 function useInputWithHelp(
     validateInput,
+    inputValue = '',
     helpPopperPosition = 'bottom',
     offset = 0
 ) {
@@ -13,7 +14,7 @@ function useInputWithHelp(
         valueChangeHandler,
         inputBlurHandler,
         reset
-    } = useInput(validateInput)
+    } = useInput(validateInput, inputValue)
 
     const {
         referenceElement,

@@ -13,6 +13,7 @@ import Loader from '../Ui/Loader/Loader'
 import Checkbox from '../Ui/Checkbox/Checkbox'
 import useCheckbox from '../../hooks/useCheckbox'
 import {useRouter} from 'next/router'
+import IconButton from '../Ui/IconButton/IconButton'
 
 const inputOptions = {
     autoCorrect: 'off',
@@ -188,6 +189,10 @@ function Header() {
         setIsTermsCheckboxChecked(!isTermsCheckboxChecked)
     }
 
+    function openUserProfileModal() {
+        router.push('/home/profile')
+    }
+
     return (
         // create a function to handle modals of all the menu options, after adding more menu options
         <>
@@ -306,10 +311,11 @@ function Header() {
             <div className={classes.header}>
                 <Logo className={classes['container-logo']} type='full' />
                 <div className={classes.actions}>
-                    {/* <IconButton
+                    <IconButton
                         className={classes['icon-button']}
                         icon='user'
-                    /> */}
+                        onClick={openUserProfileModal}
+                    />
                     <MenuIconButton
                         iconButtonClassName={classes['icon-button']}
                         icon='more'

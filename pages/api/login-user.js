@@ -1,10 +1,5 @@
 import {db} from '../../firebaseConfig'
-import {
-    collection,
-    where,
-    getDocs,
-    query,
-    updateDoc} from 'firebase/firestore'
+import {collection, where, getDocs, query, updateDoc} from 'firebase/firestore'
 
 function validateData({username, password}) {
     // TODO: input validation (eg username length, password length)
@@ -54,6 +49,9 @@ export default async function handler(req, res) {
         })
     }
 
+    const user = users.docs[0]
+    const userData = user.data()
+
     // if the user exists and credentials are correct (success)
 
     // set isOnline to true
@@ -61,7 +59,12 @@ export default async function handler(req, res) {
 
     return res.status(201).json({
         isLoginSuccessful: true,
-        userId: users.docs[0].id
+        userId: user.id,
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        phoneNumber: userData.phoneNumber,
+        email: userData.email,
+        password: userData.password
         // title: 'Success',
         // message: 'Inputs are invalid! Please fill all the inputs correctly.'
     })

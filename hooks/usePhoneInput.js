@@ -1,8 +1,8 @@
 import {useState} from 'react'
 import {isValidPhoneNumber} from 'react-phone-number-input'
 
-function usePhoneInput() {
-    const [phoneNumber, setPhoneNumber] = useState('')
+function usePhoneInput(value = '') {
+    const [phoneNumber, setPhoneNumber] = useState(value)
     const [isTouched, setIsTouched] = useState(false)
 
     const isPhoneNumberValid = phoneNumber && isValidPhoneNumber(phoneNumber)
