@@ -75,6 +75,7 @@ function Profile() {
                 message:
                     'You did not change any of your details. Your profile details have not been affected.'
             })
+            setIsLoading(false)
             openModal()
             return
         }
@@ -114,7 +115,10 @@ function Profile() {
         valueChangeHandler: firstNameChangeHandler,
         inputBlurHandler: firstNameBlurHandler,
         reset: resetFirstName
-    } = useInput(value => value.trim() !== '', authState.firstName)
+    } = useInput(
+        value => value.trim() !== '',
+        authState.firstName && authState.firstName
+    )
 
     const {
         value: lastName,
@@ -123,7 +127,10 @@ function Profile() {
         valueChangeHandler: lastNameChangeHandler,
         inputBlurHandler: lastNameBlurHandler,
         reset: resetLastName
-    } = useInput(value => value.trim() !== '', authState.lastName)
+    } = useInput(
+        value => value.trim() !== '',
+        authState.lastName && authState.lastName
+    )
     // TODO: style the dropdown menu (select) while choosing country code
     const {
         phoneNumber,
@@ -132,7 +139,7 @@ function Profile() {
         valueChangeHandler: phoneNumberChangeHandler,
         inputBlurHandler: phoneNumberBlurHandler,
         reset: resetPhoneNumber
-    } = usePhoneInput(authState.phoneNumber)
+    } = usePhoneInput(authState.phoneNumber && authState.phoneNumber)
 
     const {
         value: email,
@@ -151,7 +158,7 @@ function Profile() {
                         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
                     )
                 ),
-        authState.email
+        authState.email && authState.email
     )
 
     const {
@@ -161,7 +168,10 @@ function Profile() {
         valueChangeHandler: usernameChangeHandler,
         inputBlurHandler: usernameBlurHandler,
         reset: resetUsername
-    } = useInput(value => value.trim() !== '', authState.username)
+    } = useInput(
+        value => value.trim() !== '',
+        authState.username && authState.username
+    )
 
     const {
         value: password,
@@ -186,7 +196,7 @@ function Profile() {
                         /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[~`!@#$%^&*()_\-+={[}\]|\\:;"'<,>.?/])[a-zA-Z0-9~`!@#$%^&*()_\-+={[}\]|\\:;"'<,>.?/]{8,20}$/
                     )
                 ),
-        authState.password,
+        authState.password ? authState.password : '',
         'left',
         12
     )
