@@ -3,7 +3,7 @@ const path = require('path')
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     cleanDistDir: true,
-    reactStrictMode: true,
+    reactStrictMode: false,
     swcMinify: true,
     sassOptions: {
         includePaths: [path.join(__dirname, 'styles')]

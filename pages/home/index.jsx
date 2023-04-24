@@ -68,6 +68,7 @@ function HomePage() {
         document.addEventListener('visibilitychange', setOnlineStatus)
 
         return () => {
+            if (router.asPath === '/home') return
             document.removeEventListener('visibilitychange', setOnlineStatus)
         }
     }, [])
@@ -81,6 +82,7 @@ function HomePage() {
         return () => {
             // if the user is not authenticated or if the base path is home, then don't log out the user
             if (!isAuthenticated || router.asPath === '/home') return
+            console.log('hey')
             setIsLoading(true)
 
             dispatch(logout(userId))

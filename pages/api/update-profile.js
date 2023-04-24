@@ -4,7 +4,8 @@ import {
     where,
     getDocs,
     query,
-    collection
+    collection,
+    FieldPath
 } from 'firebase/firestore'
 import {db} from '../../firebaseConfig'
 
@@ -24,7 +25,6 @@ export default async function handler(req, res) {
 
     // if the user with new details already exists
     const usersRef = collection(db, 'users')
-
     const usersWithSameUsername = await getDocs(
         query(usersRef, where('username', '==', newAuthData.username))
     )

@@ -204,7 +204,10 @@ function Header() {
                         headerIcon='newUser'
                         buttonTitle='Ok'
                         buttonType='filled'
-                        handleClose={justCloseAddUserModal}
+                        handleClose={() => {
+                            justCloseAddUserModal()
+                            resetUsername()
+                        }}
                         buttonOnClick={closeAddUserModal}
                     >
                         <Input

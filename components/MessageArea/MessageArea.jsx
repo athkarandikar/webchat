@@ -186,7 +186,7 @@ function MessageArea(props, ref) {
                         <div className={classes['profile-image-container']}>
                             <Image
                                 className={classes.image}
-                                src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80'
+                                src='/icons/user.png'
                                 alt='Profile photo'
                                 layout='fill'
                                 objectFit='cover'
