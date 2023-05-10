@@ -1,0 +1,50 @@
+@import '../.../../styles/_animations.scss';
+
+.container-logo {
+    width: 12rem;
+    height: 5rem;
+    position: absolute;
+    transform: translateY(-100%);
+    top: 2.4rem;
+}
+
+.profile {
+    position: relative;
+    animation: fade-in 0.2s ease-out;
+    display: flex;
+    flex-direction: column;
+    gap: 2.8rem;
+
+    .container-profile-image {
+        height: 12rem;
+        width: 12rem;
+        position: relative;
+        align-self: center;
+
+        .profile-image {
+            border-radius: 50%;
+        }
+    }
+
+    .form-profile {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 6.4rem;
+
+        .inputs {
+            display: grid;
+            grid-template-columns: auto auto;
+            column-gap: 6.4rem;
+            row-gap: 3.2rem;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2.4rem;
+        }
+    }
+}
