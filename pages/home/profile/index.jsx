@@ -160,36 +160,36 @@ function Profile() {
 
     let firstName, lastName, phoneNumber, email, username, password
 
-    // if (isAuthenticated) {
-    firstName = useInput(value => value.trim() !== '', authState.firstName)
-    lastName = useInput(value => value.trim() !== '', authState.lastName)
-    phoneNumber = usePhoneInput(authState.phoneNumber)
-    email = useInput(
-        value =>
-            value
-                .trim()
-                .match(
-                    new RegExp(
-                        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-                    )
-                ),
-        authState.email
-    )
-    username = useInput(value => value.trim() !== '', authState.username)
-    password = useInputWithHelp(
-        value =>
-            value
-                .trim()
-                .match(
-                    new RegExp(
-                        /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[~`!@#$%^&*()_\-+={[}\]|\\:;"'<,>.?/])[a-zA-Z0-9~`!@#$%^&*()_\-+={[}\]|\\:;"'<,>.?/]{8,20}$/
-                    )
-                ),
-        authState.password,
-        'left',
-        12
-    )
-    // }
+    if (isAuthenticated) {
+        firstName = useInput(value => value.trim() !== '', authState.firstName)
+        lastName = useInput(value => value.trim() !== '', authState.lastName)
+        phoneNumber = usePhoneInput(authState.phoneNumber)
+        email = useInput(
+            value =>
+                value
+                    .trim()
+                    .match(
+                        new RegExp(
+                            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                        )
+                    ),
+            authState.email
+        )
+        username = useInput(value => value.trim() !== '', authState.username)
+        password = useInputWithHelp(
+            value =>
+                value
+                    .trim()
+                    .match(
+                        new RegExp(
+                            /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[~`!@#$%^&*()_\-+={[}\]|\\:;"'<,>.?/])[a-zA-Z0-9~`!@#$%^&*()_\-+={[}\]|\\:;"'<,>.?/]{8,20}$/
+                        )
+                    ),
+            authState.password,
+            'left',
+            12
+        )
+    }
 
     // const {
     //     value: firstName,
