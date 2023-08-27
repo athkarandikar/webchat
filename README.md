@@ -1,12 +1,9 @@
-![logo-full](https://github.com/athkarandikar/webchat/assets/85398966/ad63b5d8-0db7-43ba-8b9d-6f965602fab1)
+[![logo-full](https://github.com/athkarandikar/webchat/assets/85398966/ad63b5d8-0db7-43ba-8b9d-6f965602fab1)](https://webchat-delta.vercel.app)
 
 A simple and easy to use chat application with sentiment analysis supporting private textual messages.
 
-Technologies used:
-- NextJS
-- Firebase Cloud Firestore
-- ReactJS
-- SASS
+### Technologies Used
+NextJS, ReactJS, Firebase Cloud Firestore, Javascript, SASS, HTML, CSS
 
 Chat applications generate large amounts of data every day. Every user sends a lot of textual data over the network.  
 Nowadays, people talk more online than in-person. The online world has evolved very rapidly, and is growing exponentially, and will keep growing in the future. There is currently a lot of hatred and violence in society, which disturbs personal physical and mental state.  
