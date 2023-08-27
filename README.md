@@ -5,6 +5,7 @@ A simple and easy to use chat application with sentiment analysis supporting pri
 ### Technologies Used
 NextJS, ReactJS, Firebase Cloud Firestore, Javascript, SASS, HTML, CSS
 
+### About
 Chat applications generate large amounts of data every day. Every user sends a lot of textual data over the network.  
 Nowadays, people talk more online than in-person. The online world has evolved very rapidly, and is growing exponentially, and will keep growing in the future. There is currently a lot of hatred and violence in society, which disturbs personal physical and mental state.  
 At present, no chat application provides the feature of sentiment analysis.  
