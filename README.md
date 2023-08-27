@@ -1,4 +1,4 @@
-[![logo-full](https://github.com/athkarandikar/webchat/assets/85398966/ad63b5d8-0db7-43ba-8b9d-6f965602fab1)](https://webchat-delta.vercel.app)
+![logo-full](https://github.com/athkarandikar/webchat/assets/85398966/ad63b5d8-0db7-43ba-8b9d-6f965602fab1)
 
 A simple and easy to use chat application with sentiment analysis supporting private textual messages.
 
