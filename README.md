@@ -39,9 +39,9 @@
 </defs>
 </svg>
 
-![logo-full](https://github.com/Ath1000/webchat/assets/85398966/cbdd2bd2-7553-4972-8660-d234a3f04e7c)
+![logo-full](https://github.com/athkarandikar/webchat/assets/85398966/cbdd2bd2-7553-4972-8660-d234a3f04e7c)
 
-A simple and easy to use chat application with sentiment analysis supporting textual messages.
+A simple and easy to use chat application with sentiment analysis supporting private textual messages.
 
 Technologies used:
 - NextJS
